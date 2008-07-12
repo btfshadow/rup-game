@@ -1,8 +1,11 @@
 <%@include file="_head.jspf"%>
 <%
 	final ViewBean bean = (ViewBean) request.getAttribute("viewBean");
+	final String user = (String)session.getAttribute("user");
 %>
 <body>
+	Hello <%=user%>
+
 	<h2>Available subjects</h2>
 	
 	<div>

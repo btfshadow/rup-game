@@ -4,7 +4,7 @@
 	<h1>Welcome to RUP Game</h1>
 
 	<div>
-		<form name="logform" action="#" method="post">
+		<form name="logform" commandName="userBean">
 			<fieldset>
 				<legend>Please fill in your name.</legend> 
 				<label for="name">Name</label>

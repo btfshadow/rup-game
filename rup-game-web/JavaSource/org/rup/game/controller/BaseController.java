@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.rup.game.controller.bean.ViewBean;
@@ -26,7 +27,7 @@ public class BaseController extends SimpleFormController {
 		super();
 		this.subjectDao = baseDao;
 		setFormView("welcome");
-		setCommandName("viewBean");
+		setCommandName("useBean");
 		setSuccessView("chooseSubject");
 	}
 
@@ -34,7 +35,9 @@ public class BaseController extends SimpleFormController {
 			HttpServletResponse arg1, Object arg2, BindException arg3)
 			throws Exception {
 		LOG.info("Authenticating the user.");
-		
+		HttpSession session = request.getSession();
+		String user = "user";  
+		session.setAttribute("user", user);
 		return super.onSubmit(request, arg1, arg2, arg3);
 	}
 

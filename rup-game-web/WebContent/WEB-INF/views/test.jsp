@@ -1,8 +1,10 @@
 <%@include file="_head.jspf" %>
 <%
 	final QuizBean bean = (QuizBean) request.getAttribute("testBean");
+	final String user = (String)session.getAttribute("user");
 %>
 <body>
+	Hello <%=user%>
 	<h2>Test</h2>
 	
 	<p>

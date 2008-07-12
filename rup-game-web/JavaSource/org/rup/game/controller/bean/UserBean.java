@@ -6,4 +6,6 @@ package org.rup.game.controller.bean;
  */
 public class UserBean extends ViewBean {
 
+	private String name;
+	private String surname;
 }
