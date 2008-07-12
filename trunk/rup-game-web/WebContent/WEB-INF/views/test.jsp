@@ -19,22 +19,19 @@
 	
 		<form:form commandName="testBean">
 			<ol>
-				<% for (java.util.Iterator iter = bean.getQuestions().iterator(); iter.hasNext();) {
-					final Question question = (Question) iter.next();
-				%>
+				<c:forEach items="${testBean.questions}" var="q">
 					<li>
-						<%=question.getDescription()%>
+						<c:out value="${q.description}"/>
 						<ul>
-						<% for (java.util.Iterator iterAnsw = question.getAnswers().iterator(); iterAnsw.hasNext();) {
-							final Answer answer = (Answer) iterAnsw.next();
-						%>
+						<c:forEach items="${q.answers}" var="answ">
 							<li>
-								<input type="checkbox"/> <%=answer.getText()%>
+								<form:checkbox path="userAnswer" />
+								<c:out value="${answ.text}"/>
 							</li>
-						<% } %>
+						</c:forEach>
 						</ul>
 					</li>
-				<% } %>
+				</c:forEach>
 			</ol>
 		
 			<p>

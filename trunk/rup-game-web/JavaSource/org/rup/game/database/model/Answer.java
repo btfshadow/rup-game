@@ -10,6 +10,8 @@ public class Answer  extends BaseDomainObject {
 	private String text;
 	
 	private boolean correct;
+	
+	private String userAnswer;
 
 	/**
 	 * @return Returns the correct.
@@ -37,5 +39,17 @@ public class Answer  extends BaseDomainObject {
 	 */
 	public void setText(String text) {
 		this.text = text;
+	}
+	/**
+	 * @return Returns the userAnswer.
+	 */
+	public String setUserAnswer() {
+		return userAnswer;
+	}
+	/**
+	 * @param userAnswer The userAnswer to set.
+	 */
+	public void setUserAnswer(String userAnswer) {
+		this.userAnswer = userAnswer;
 	}
 }
