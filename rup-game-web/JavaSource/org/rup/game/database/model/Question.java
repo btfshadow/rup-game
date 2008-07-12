@@ -8,9 +8,7 @@ import java.util.List;
  */
 public class Question  extends BaseDomainObject {
 
-	private String text;
-	
-	private SkillLevel skill;
+	private String description;
 	
 	private List answers;
 	
@@ -29,30 +27,17 @@ public class Question  extends BaseDomainObject {
 	}
 	
 	/**
-	 * @return Returns the text.
+	 * @return Returns the description.
 	 */
-	public String getText() {
-		return text;
+	public String getDescription() {
+		return description;
 	}
 	
 	/**
-	 * @param text The text to set.
+	 * @param description The description to set.
 	 */
-	public void setText(String text) {
-		this.text = text;
+	public void setDescription(String text) {
+		this.description = text;
 	}
 	
-	/**
-	 * @return Returns the skill.
-	 */
-	public SkillLevel getSkill() {
-		return skill;
-	}
-	
-	/**
-	 * @param skill The skill to set.
-	 */
-	public void setSkill(SkillLevel skill) {
-		this.skill = skill;
-	}
 }
