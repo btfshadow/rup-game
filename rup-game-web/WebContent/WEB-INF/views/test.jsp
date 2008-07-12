@@ -17,7 +17,7 @@
 						final Answer answer = (Answer) iterAnsw.next();
 					%>
 						<li>
-							<input type="checkbox"/> <%=answer.getText()%>
+							<input type="checkbox"/ value=<%=answer.getText()%>> <%=answer.getText()%>
 						</li>
 					<% } %>
 					</ul>
