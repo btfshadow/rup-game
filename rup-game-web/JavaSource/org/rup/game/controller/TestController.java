@@ -1,5 +1,8 @@
 package org.rup.game.controller;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -45,7 +48,10 @@ public class TestController extends SimpleFormController {
 		Subject subject = (Subject) subjectDao.get(new Long(subjectId));
 		if (subject == null) {
 			LOG.error("Could not find subject with id=" + subjectId);
-			return new QuizBean();
+			
+			QuizBean quizBean = new QuizBean();
+			quizBean.setQuestions(new HashSet());
+			return quizBean;
 			
 		} else {
 			LOG.info("Loaded subject with " + subject.getQuestions().size()

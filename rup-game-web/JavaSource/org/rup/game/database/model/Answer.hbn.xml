@@ -10,8 +10,8 @@
 			<generator class="increment"/>
 		</id>
 		
-		<property name="text" column="text" lazy="true"/>
-		<property name="correct" column="correct" lazy="true"/>
+		<property name="text" column="text" lazy="false"/>
+		<property name="correct" column="correct" lazy="false"/>
 		
 	</class>
 </hibernate-mapping>

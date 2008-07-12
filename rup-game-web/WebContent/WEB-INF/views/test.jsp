@@ -1,26 +1,25 @@
 <%@include file="_head.jspf" %>
 <%
-	final String[] questionList = new String[10];
-	request.setAttribute("questionList", questionList);
+	final QuizBean bean = (QuizBean) request.getAttribute("viewBean");
 %>
 <body>
 	<h2>Test</h2>
 
 	<form:form commandName="testBean">
 		<ol>
-			<% for (int i = 0; i < questionList.length; i++) { %>
+			<% for (java.util.Iterator iter = bean.getQuestions().iterator(); iter.hasNext();) {
+				final Question question = (Question) iter.next();
+			%>
 				<li>
-					What do you think the weather will be like tomorrow?
+					<%=question.getDescription()%>
 					<ul>
+					<% for (java.util.Iterator iterAnsw = question.getAnswers().iterator(); iterAnsw.hasNext();) {
+						final Answer answer = (Answer) iterAnsw.next();
+					%>
 						<li>
-							<input type="checkbox"/> Rainy
+							<input type="checkbox"/> <%=answer.getText()%>
 						</li>
-						<li>
-							<input type="checkbox"/> Sun
-						</li>
-						<li>
-							<input type="checkbox"/> Snow
-						</li>
+					<% } %>
 					</ul>
 				</li>
 			<% } %>

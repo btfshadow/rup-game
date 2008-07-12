@@ -1,6 +1,6 @@
 package org.rup.game.database.model;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * 
@@ -10,21 +10,21 @@ public class Question  extends BaseDomainObject {
 
 	private String description;
 	
-	private List answers;
+	private Set answers;
 	
 	private SkillLevel skillLevel;
 	
 	/**
 	 * @return Returns the answers.
 	 */
-	public List getAnswers() {
+	public Set getAnswers() {
 		return answers;
 	}
 	
 	/**
 	 * @param answers The answers to set.
 	 */
-	public void setAnswers(List answers) {
+	public void setAnswers(Set answers) {
 		this.answers = answers;
 	}
 	
