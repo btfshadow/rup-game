@@ -4,7 +4,7 @@
    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-	<class name="org.rup.game.database.model.Topic" table="TOPIC">
+	<class name="org.rup.game.database.model.Subject" table="SUBJECT">
 
 		<id name="id" column="ID">
 			<generator class="increment"/>
