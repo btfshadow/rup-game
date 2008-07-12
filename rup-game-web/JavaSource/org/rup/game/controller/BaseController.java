@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
+import org.rup.game.controller.bean.UserBean;
 import org.rup.game.controller.bean.ViewBean;
 import org.rup.game.database.dao.SubjectDao;
 import org.rup.game.mock.utils.MockUtils;
@@ -36,7 +37,8 @@ public class BaseController extends SimpleFormController {
 			throws Exception {
 		LOG.info("Authenticating the user.");
 		HttpSession session = request.getSession();
-		String user = "user";  
+		UserBean userBean = (UserBean)arg2;
+		String user = userBean.getName() + " " + userBean.getSurname();  
 		session.setAttribute("user", user);
 		return super.onSubmit(request, arg1, arg2, arg3);
 	}

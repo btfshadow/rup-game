@@ -1,3 +1,30 @@
-body {
+body * {
 	color: blue;
+	font-family: tahoma, arial, helvetica;
+	font-size: 10pt;
+}
+
+code {
+	font-family: monospace;
+	font-size: 10pt;
+	font-weight: bold;
+}
+
+.strong {
+	font-size: 48pt;
+	font-weight: bold;
+}
+
+.box {
+	width: 350px;
+	clear: right;
+	float: right;
+	border: 1px #000000 dashed;
+	padding: 10px;
+	margin: 10px;
+	background-color: #fff9e0;
+}
+
+.box * {
+	font-size: 9pt;
 }

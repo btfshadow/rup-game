@@ -1,36 +1,8 @@
-
-<html>
-
-<head>
-	<title>Manage My Skills</title>
-	<style type="text/css">
-	body * {
-		font-family: tahoma,arial,helvetica;
-		font-size: 10pt;
-	}
-	code {
-		font-family: monospace;
-		font-size: 10pt;
-		font-weight: bold;
-	}
-	.strong {
-		font-size: 48pt;
-		font-weight: bold;
-	}
-	.box {
-		width: 350px;
-		clear: right;
-		float: right;
-		border: 1px #000000 dashed;
-		padding: 10px;
-		margin: 10px;
-		background-color: #fff9e0;
-	}
-	.box * {
-		font-size: 9pt;
-	}
-	</style>
-</head>
+<%@include file="_head.jspf" %>
+<%
+	final QuizBean bean = (QuizBean) request.getAttribute("testBean");
+	final String user = (String)session.getAttribute("user");
+%>
 
 <body>
 
@@ -66,7 +38,7 @@
 	<p>Dynamic content starts here, to be filled in by server-side code</p>
 	<p>Subject Selected for Testing</p>
 	<p>Skill Level Selected for Testing</p>
-	<p>Name</p>
+	<p>Name: <%=user%></p>
 	<p>Picture (=nice to have)</p>
 	<p>Date, Time</p>
 	<p>Duration (= nice to have)</p>
