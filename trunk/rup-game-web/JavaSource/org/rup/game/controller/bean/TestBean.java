@@ -4,7 +4,7 @@ package org.rup.game.controller.bean;
  * 
  * @author KLM63827
  */
-public class TestBean {
+public class TestBean extends ViewBean {
 
 	private int objectsCount;
 	

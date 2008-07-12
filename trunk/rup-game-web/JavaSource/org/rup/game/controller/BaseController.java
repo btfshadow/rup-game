@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.rup.game.controller.bean.ViewBean;
-import org.rup.game.database.dao.BaseDao;
+import org.rup.game.database.dao.TopicDao;
 import org.springframework.validation.BindException;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.SimpleFormController;
@@ -17,9 +17,9 @@ import org.springframework.web.servlet.mvc.SimpleFormController;
 public class BaseController extends SimpleFormController {
 	private static final Logger LOG = Logger.getLogger(BaseController.class);
 	
-	private BaseDao baseDao;
+	private TopicDao baseDao;
 	
-	public BaseController(BaseDao baseDao) {
+	public BaseController(TopicDao baseDao) {
 		super();
 		this.baseDao = baseDao;
 		setFormView("welcome");
@@ -27,20 +27,19 @@ public class BaseController extends SimpleFormController {
 		setSuccessView("chooseSubject");
 	}
 
-	protected ModelAndView onSubmit(HttpServletRequest arg0,
+	protected ModelAndView onSubmit(HttpServletRequest request,
 			HttpServletResponse arg1, Object arg2, BindException arg3)
 			throws Exception {
+		LOG.info("Authenticating the user.");
 		
-		return super.onSubmit(arg0, arg1, arg2, arg3);
+		return super.onSubmit(request, arg1, arg2, arg3);
 	}
 
 	protected Object formBackingObject(HttpServletRequest arg0)
 			throws Exception {
 		LOG.info("Reading domain objects from database.");
 		
-		final ViewBean bean = new ViewBean();
-		bean.setObjectsCount(baseDao.list().size());
-		
+		final ViewBean bean = new ViewBean();		
 		return bean;
 	}
 }
