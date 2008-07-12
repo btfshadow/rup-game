@@ -27,7 +27,7 @@ public class BaseController extends SimpleFormController {
 		super();
 		this.subjectDao = baseDao;
 		setFormView("welcome");
-		setCommandName("useBean");
+		setCommandName("userBean");
 		setSuccessView("chooseSubject");
 	}
 
@@ -35,10 +35,10 @@ public class BaseController extends SimpleFormController {
 			HttpServletResponse arg1, Object arg2, BindException arg3)
 			throws Exception {
 		LOG.info("Authenticating the user.");
-		HttpSession session = request.getSession();
-		UserBean userBean = (UserBean)arg2;
-		String user = userBean.getName() + " " + userBean.getSurname();  
-		session.setAttribute("user", user);
+//		HttpSession session = request.getSession();
+//		UserBean userBean = (UserBean) arg2;
+//		String user = userBean.getName() + " " + userBean.getSurname();  
+//		session.setAttribute("user", user);
 		return super.onSubmit(request, arg1, arg2, arg3);
 	}
 
