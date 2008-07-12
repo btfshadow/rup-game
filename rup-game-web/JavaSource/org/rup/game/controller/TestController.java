@@ -67,7 +67,6 @@ public class TestController extends SimpleFormController {
 			LOG.info("Loaded subject " + subject.getName() + "with " + subject.getQuestions().size()
 					+ " questions.");
 
-
 			Set randomQuestions = getRandomQuestions(subject.getQuestions());
 			
 			List listOfRandomQuestions = new ArrayList();

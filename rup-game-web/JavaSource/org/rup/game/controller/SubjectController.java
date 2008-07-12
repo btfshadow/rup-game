@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
+import org.rup.game.controller.bean.ViewBean;
 import org.rup.game.database.dao.SubjectDao;
 import org.rup.game.mock.utils.MockUtils;
 import org.springframework.web.servlet.ModelAndView;
@@ -16,12 +17,12 @@ import org.springframework.web.servlet.mvc.Controller;
  * 
  * @author KLM63827
  */
-public class SubjectsController implements Controller {
-	private static final Logger LOG = Logger.getLogger(SubjectsController.class);
+public class SubjectController implements Controller {
+	private static final Logger LOG = Logger.getLogger(SubjectController.class);
 	
 	private SubjectDao subjectDao;
 
-	public SubjectsController(SubjectDao subjectDao) {
+	public SubjectController(SubjectDao subjectDao) {
 		this.subjectDao = subjectDao;
 	}
 	
@@ -30,7 +31,6 @@ public class SubjectsController implements Controller {
 	 */
 	public ModelAndView handleRequest(HttpServletRequest arg0, HttpServletResponse arg1) throws Exception {
 		LOG.info("Reading subjects from database.");
-		subjectDao.update(MockUtils.getSubject());
 		
 		List subjectList = subjectDao.list();
 		LOG.info("Loaded " + subjectList.size() + " subjects.");
