@@ -3,8 +3,8 @@
  */
 package org.rup.game.mock.utils;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.rup.game.database.model.Answer;
 import org.rup.game.database.model.Question;
@@ -18,24 +18,26 @@ import org.rup.game.database.model.Subject;
 public class MockUtils {
 
 	public static boolean called = false;
-	public static List getSubject()
+	public static Subject getSubject()
 	{
-		List subjects = new ArrayList();
+		System.out.println("jasgdajsgd!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+		Set subjects = new HashSet();
 		Subject subjectOne = new Subject();
-		List questions = getQuestions();
+		Set questions = getQuestions();
 		subjectOne.setQuestions(questions);
 		subjectOne.setName("Sports");
-		return subjects;		  
+		subjects.add(subjectOne);
+		return subjectOne;		  
 	}
 
 	/**
 	 * @return
 	 */
-	private static List getQuestions() {
-		List questions = new ArrayList();
+	private static Set getQuestions() {
+		Set questions = new HashSet();
 		Question q = new Question();
 		q.setDescription("Who is best footballer in thw world?");
-		List answers = getAnswers();
+		Set answers = getAnswers();
 		q.setAnswers(answers);
 		return questions;
 	}
@@ -43,8 +45,8 @@ public class MockUtils {
 	/**
 	 * @return
 	 */
-	private static List getAnswers() {
-		List answers = new ArrayList();
+	private static Set getAnswers() {
+		Set answers = new HashSet();
 		Answer answer = new Answer();
 		answer.setCorrect(true);
 		answer.setText("Eusebio");
