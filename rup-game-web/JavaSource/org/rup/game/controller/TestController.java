@@ -41,6 +41,8 @@ public class TestController extends SimpleFormController {
 			throws Exception {
 		LOG.info("Evaluating the test.");
 		
+		final QuizBean result = (QuizBean) arg2;
+		
 		setSuccessView("testResult");
 		ModelAndView mav = new ModelAndView("testResult");
 		return mav;
@@ -55,7 +57,7 @@ public class TestController extends SimpleFormController {
 			LOG.error("Could not find subject with id=" + subjectId);
 			
 			QuizBean quizBean = new QuizBean();
-			quizBean.setQuestions(new HashSet());
+			quizBean.setQuestions(new ArrayList());
 			return quizBean;
 			
 		} else {

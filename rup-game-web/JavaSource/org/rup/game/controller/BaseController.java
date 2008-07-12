@@ -46,7 +46,6 @@ public class BaseController extends SimpleFormController {
 	protected Object formBackingObject(HttpServletRequest arg0)
 			throws Exception {
 		LOG.info("Reading subjects from database.");
-		subjectDao.update(MockUtils.getSubject());
 		
 		List subjectList = subjectDao.list();
 		LOG.info("Loaded " + subjectList.size() + " subjects.");
