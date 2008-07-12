@@ -4,8 +4,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
+import org.rup.game.controller.bean.TestBean;
 import org.rup.game.controller.bean.ViewBean;
-import org.rup.game.database.dao.BaseDao;
+import org.rup.game.database.dao.TopicDao;
 import org.springframework.validation.BindException;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
@@ -19,9 +20,9 @@ import org.springframework.web.servlet.view.RedirectView;
 public class TestController extends SimpleFormController {
 	private static final Logger LOG = Logger.getLogger(TestController.class);
 	
-	private BaseDao baseDao;
+	private TopicDao baseDao;
 	
-	public TestController(BaseDao baseDao) {
+	public TestController(TopicDao baseDao) {
 		super();
 		this.baseDao = baseDao;
 		setFormView("test");
@@ -42,7 +43,7 @@ public class TestController extends SimpleFormController {
 			throws Exception {
 		LOG.info("Creating a test.");
 		
-		final ViewBean bean = new ViewBean();
+		final TestBean bean = new TestBean();
 		bean.setObjectsCount(baseDao.list().size());
 		
 		return bean;

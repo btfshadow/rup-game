@@ -7,14 +7,14 @@ import org.rup.game.database.model.BaseDomainObject;
  *
  * @author klm63827
  */
-public class BaseDao extends AbstractDaoSupport {
+public class TopicDao extends AbstractDaoSupport {
 	
-	private static String ENTITY_NAME = "BaseDomainObject";
+	private static String ENTITY_NAME = "Topic";
 	
 	/**
 	 * @param persistedClass
 	 */
-	public BaseDao() {
+	public TopicDao() {
 		super(BaseDomainObject.class, ENTITY_NAME);
 	}
 }
