@@ -17,17 +17,25 @@ import org.rup.game.database.model.Subject;
  */
 public class MockUtils {
 
-	public static boolean called = false;
+	private static boolean called = false;
+	
 	public static Subject getSubject()
 	{
-		System.out.println("jasgdajsgd!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-		Set subjects = new HashSet();
-		Subject subjectOne = new Subject();
-		Set questions = getQuestions();
-		subjectOne.setQuestions(questions);
-		subjectOne.setName("Sports");
-		subjects.add(subjectOne);
-		return subjectOne;		  
+		if (!called) {
+			System.out.println("INSERT !!!!!!!!!!!!!!!!!!!!!!!!!!!");
+			Set subjects = new HashSet();
+			Subject subjectOne = new Subject();
+			Set questions = getQuestions();
+			subjectOne.setQuestions(questions);
+			subjectOne.setName("Sports");
+			subjects.add(subjectOne);
+			
+			called = true;
+			return subjectOne;
+		} else {
+			
+			return null;
+		}
 	}
 
 	/**

@@ -42,8 +42,8 @@ public abstract class AbstractDaoSupport extends HibernateDaoSupport {
 	 * @see com.klm.mmb.database.dao.IDao#update(com.klm.mmb.database.model.AbstractDomainObject)
 	 */
 	public void update(Object object) {
-
-		getHibernateTemplate().saveOrUpdate(object);
+		if (object != null)
+			getHibernateTemplate().saveOrUpdate(object);
 	}
 
 	/* (non-Javadoc)
