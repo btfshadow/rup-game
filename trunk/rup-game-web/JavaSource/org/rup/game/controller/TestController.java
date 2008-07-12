@@ -1,6 +1,7 @@
 package org.rup.game.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -14,6 +15,7 @@ import org.apache.log4j.Logger;
 import org.rup.game.controller.bean.AnswerBean;
 import org.rup.game.controller.bean.QuestionBean;
 import org.rup.game.controller.bean.QuizBean;
+import org.rup.game.controller.bean.ResultBean;
 import org.rup.game.database.dao.SubjectDao;
 import org.rup.game.database.model.Answer;
 import org.rup.game.database.model.Question;
@@ -46,9 +48,37 @@ public class TestController extends SimpleFormController {
 		
 		final QuizBean result = (QuizBean) arg2;
 		
+		ResultBean resultBean = calculateResult(result); 
+		final HashMap model = new HashMap();
+		model.put("resultBean", resultBean);
 		setSuccessView("testResult");
-		ModelAndView mav = new ModelAndView("testResult");
+		ModelAndView mav = new ModelAndView("testResult", model);
 		return mav;
+	}
+
+	/**
+	 * @param result
+	 * @return
+	 */
+	private ResultBean calculateResult(QuizBean result) {
+		
+		int score = 0;
+		ResultBean resultBean = new ResultBean();
+		Iterator it = result.getQuestions().iterator();
+		while (it.hasNext()) {
+			QuestionBean question = (QuestionBean)it.next();
+			Iterator iteratorAnswers = question.getAnswers().iterator();
+			while (iteratorAnswers.hasNext()) {
+				AnswerBean answer = (AnswerBean)iteratorAnswers.next();
+				if(answer.getUserinput().equals("AAAA") && answer.isCorrect())
+				{
+					score++;
+					break;					
+				}
+			}
+		}
+		resultBean.setResult(score/2);
+		return resultBean;
 	}
 
 	protected Object formBackingObject(HttpServletRequest request) throws Exception {
