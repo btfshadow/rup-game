@@ -8,9 +8,10 @@
 			<fieldset>
 				<legend>Please fill in your name.</legend> 
 				<label for="name">Name</label>
-				<input name="name"> 
+				<input type="text" name="name"> 
 				<label for="surname">Surname</label>
-				<input name="surname"> 
+				<input type="text" name="surname"> 
+				<input type="submit" value="Submit"> 
 			</fieldset>
 		</form>
 	</div>
