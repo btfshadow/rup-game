@@ -67,7 +67,7 @@
     ****************************************************
     -->
 
-	<bean id="baseDao" class="org.rup.game.database.dao.BaseDao">
+	<bean id="subjectDao" class="org.rup.game.database.dao.SubjectDao">
     	<property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
