@@ -5,13 +5,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.rup.game.controller.bean.TestBean;
-import org.rup.game.controller.bean.ViewBean;
-import org.rup.game.database.dao.Subject;
+import org.rup.game.database.dao.SubjectDao;
 import org.springframework.validation.BindException;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.mvc.SimpleFormController;
-import org.springframework.web.servlet.view.RedirectView;
 
 /**
  * 
@@ -20,9 +17,9 @@ import org.springframework.web.servlet.view.RedirectView;
 public class TestController extends SimpleFormController {
 	private static final Logger LOG = Logger.getLogger(TestController.class);
 	
-	private Subject baseDao;
+	private SubjectDao baseDao;
 	
-	public TestController(Subject baseDao) {
+	public TestController(SubjectDao baseDao) {
 		super();
 		this.baseDao = baseDao;
 		setFormView("test");
