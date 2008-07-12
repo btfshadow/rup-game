@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
-import org.rup.game.controller.bean.ViewBean;
 import org.rup.game.database.dao.SubjectDao;
 import org.rup.game.mock.utils.MockUtils;
 import org.springframework.web.servlet.ModelAndView;

@@ -11,8 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
+import org.rup.game.controller.bean.AnswerBean;
+import org.rup.game.controller.bean.QuestionBean;
 import org.rup.game.controller.bean.QuizBean;
 import org.rup.game.database.dao.SubjectDao;
+import org.rup.game.database.model.Answer;
 import org.rup.game.database.model.Question;
 import org.rup.game.database.model.Subject;
 import org.springframework.validation.BindException;
@@ -67,11 +70,40 @@ public class TestController extends SimpleFormController {
 
 			Set randomQuestions = getRandomQuestions(subject.getQuestions());
 			
+			List listOfRandomQuestions = new ArrayList();
+			Iterator itRandom = randomQuestions.iterator();
+			while(itRandom.hasNext()) {
+				Question q = (Question)itRandom.next();
+				QuestionBean newQuestion = new QuestionBean();
+				newQuestion.setText(q.getDescription());
+				List listAnswers = getAnswers(q.getAnswers());
+				newQuestion.setAnswers(listAnswers);
+			}
+			
 			final QuizBean bean = new QuizBean();
-			bean.setQuestions(randomQuestions);
+			bean.setQuestions(listOfRandomQuestions);
 			
 			return bean;
 		}
+	}
+
+	/**
+	 * @param set
+	 * @return
+	 */
+	private List getAnswers(Set answers) {
+		
+		List newAnswers = new ArrayList();
+		Iterator itAnswers = answers.iterator();
+		while(itAnswers.hasNext()) {
+			AnswerBean newAnswer = new AnswerBean();
+			Answer answer = (Answer)itAnswers.next();
+			newAnswer.setCorrect(answer.isCorrect());
+			newAnswer.setText(answer.getText());
+			newAnswers.add(newAnswer);
+		}
+		
+		return newAnswers;
 	}
 
 	/**
