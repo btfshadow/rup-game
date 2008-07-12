@@ -1,6 +1,6 @@
 package org.rup.game.database.dao;
 
-import org.rup.game.database.model.BaseDomainObject;
+import org.rup.game.database.model.Question;
 
 /**
  * 
@@ -15,6 +15,6 @@ public class QuestionDao extends AbstractDaoSupport {
 	 * @param persistedClass
 	 */
 	public QuestionDao() {
-		super(BaseDomainObject.class, ENTITY_NAME);
+		super(Question.class, ENTITY_NAME);
 	}
 }

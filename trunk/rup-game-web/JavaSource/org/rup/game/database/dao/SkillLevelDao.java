@@ -1,6 +1,6 @@
 package org.rup.game.database.dao;
 
-import org.rup.game.database.model.BaseDomainObject;
+import org.rup.game.database.model.SkillLevel;
 
 /**
  * 
@@ -15,6 +15,6 @@ public class SkillLevelDao extends AbstractDaoSupport {
 	 * @param persistedClass
 	 */
 	public SkillLevelDao() {
-		super(BaseDomainObject.class, ENTITY_NAME);
+		super(SkillLevel.class, ENTITY_NAME);
 	}
 }
