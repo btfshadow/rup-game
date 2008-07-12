@@ -43,12 +43,19 @@ public class TestController extends SimpleFormController {
 		long subjectId = ServletRequestUtils.getRequiredLongParameter(request, "subjectId");
 		
 		Subject subject = (Subject) subjectDao.get(new Long(subjectId));
-		
-		// TODO: Pick random questions here
-		
-		final QuizBean bean = new QuizBean();
-		bean.setQuestions(subject.getQuestions());
-		
-		return bean;
+		if (subject == null) {
+			LOG.error("Could not find subject with id=" + subjectId);
+			return new QuizBean();
+			
+		} else {
+			LOG.info("Loaded subject with " + subject.getQuestions().size()
+					+ " questions.");
+			// TODO: Pick random questions here
+			
+			final QuizBean bean = new QuizBean();
+			bean.setQuestions(subject.getQuestions());
+			
+			return bean;
+		}
 	}
 }

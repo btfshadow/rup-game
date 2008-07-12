@@ -1,8 +1,6 @@
 <%@include file="_head.jspf"%>
 <body>
-	<div>
-	<h1>Subject</h1>
-	</div>
+	<h2>Available subjects</h2>
 	<div>
 		<form name="subjectform" action="#" method="post">
 			<fieldset>
