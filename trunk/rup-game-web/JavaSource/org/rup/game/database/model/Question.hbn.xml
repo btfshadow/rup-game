@@ -12,7 +12,9 @@
 		
 		<property name="description" column="description" lazy="false"/>
 		
+		<!-- 
 		<many-to-one name="skillLevel" column="skillLevelId" not-null="true" lazy="false"/>
+		 -->
 
 		<set name="answers" cascade="all,delete-orphan" lazy="false">
 			<key column="QUESTION_ID"/>

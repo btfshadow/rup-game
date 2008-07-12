@@ -1,6 +1,6 @@
 <%@include file="_head.jspf" %>
 <%
-	final QuizBean bean = (QuizBean) request.getAttribute("viewBean");
+	final QuizBean bean = (QuizBean) request.getAttribute("testBean");
 %>
 <body>
 	<h2>Test</h2>

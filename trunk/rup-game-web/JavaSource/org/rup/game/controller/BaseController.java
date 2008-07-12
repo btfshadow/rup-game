@@ -29,12 +29,6 @@ public class BaseController extends SimpleFormController {
 		setFormView("welcome");
 		setCommandName("viewBean");
 		setSuccessView("chooseSubject");
-		
-		if(MockUtils.called == false)
-		{
-			subjectDao.update(MockUtils.getSubject());
-			MockUtils.called = true;
-		}
 	}
 
 	protected ModelAndView onSubmit(HttpServletRequest request,
@@ -48,6 +42,7 @@ public class BaseController extends SimpleFormController {
 	protected Object formBackingObject(HttpServletRequest arg0)
 			throws Exception {
 		LOG.info("Reading subjects from database.");
+		subjectDao.update(MockUtils.getSubject());
 		
 		List subjectList = subjectDao.list();
 		LOG.info("Loaded " + subjectList.size() + " subjects.");

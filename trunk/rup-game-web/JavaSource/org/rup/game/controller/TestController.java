@@ -54,7 +54,7 @@ public class TestController extends SimpleFormController {
 			return quizBean;
 			
 		} else {
-			LOG.info("Loaded subject with " + subject.getQuestions().size()
+			LOG.info("Loaded subject " + subject.getName() + "with " + subject.getQuestions().size()
 					+ " questions.");
 			// TODO: Pick random questions here
 			
