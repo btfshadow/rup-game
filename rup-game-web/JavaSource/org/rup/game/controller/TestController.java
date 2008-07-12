@@ -67,10 +67,12 @@ public class TestController extends SimpleFormController {
 		Iterator it = result.getQuestions().iterator();
 		while (it.hasNext()) {
 			QuestionBean question = (QuestionBean)it.next();
+			System.out.println("Question: " +  question.getText());
 			Iterator iteratorAnswers = question.getAnswers().iterator();
 			while (iteratorAnswers.hasNext()) {
 				AnswerBean answer = (AnswerBean)iteratorAnswers.next();
-				if(answer.getUserinput().equals("AAAA") && answer.isCorrect())
+				System.out.println("  " + answer.getText() + ": " + answer.getUserinput());
+				if("true".equals(answer.getUserinput()) && answer.isCorrect())
 				{
 					score++;
 					break;					
@@ -107,6 +109,7 @@ public class TestController extends SimpleFormController {
 				newQuestion.setText(q.getDescription());
 				List listAnswers = getAnswers(q.getAnswers());
 				newQuestion.setAnswers(listAnswers);
+				listOfRandomQuestions.add(newQuestion);
 			}
 			
 			final QuizBean bean = new QuizBean();

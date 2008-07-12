@@ -17,11 +17,16 @@
 		-->
 		<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
 		<property name="show_sql">true</property>
+		<property name="hibernate.hbm2ddl.auto">create-drop</property>
 
 		<!--
 			OR mappings
 		-->
-		<mapping resource="org/rup/game/database/model/BaseDomainObject.hbn.xml" />
+		<mapping resource="org/rup/game/database/model/Question.hbn.xml" />
+		<mapping resource="org/rup/game/database/model/Subject.hbn.xml" />
+		<mapping resource="org/rup/game/database/model/Answer.hbn.xml" />
+		<!-- <mapping resource="org/rup/game/database/model/SkillLevel.hbn.xml" /> -->
 
 	</session-factory>
+
 </hibernate-configuration>

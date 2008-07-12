@@ -1,10 +1,8 @@
 <%@include file="_head.jspf" %>
 <%
 	final QuizBean bean = (QuizBean) request.getAttribute("testBean");
-	final String user = (String)session.getAttribute("user");
 %>
 <body>
-	Hello <%=user%>
 	<h2>Test</h2>
 	
 	<p>
@@ -19,13 +17,13 @@
 	
 		<form:form commandName="testBean">
 			<ol>
-				<c:forEach items="${testBean.questions}" var="q">
+				<c:forEach items="${testBean.questions}" var="q" varStatus="qi">
 					<li>
-						<c:out value="${q.description}"/>
+						<c:out value="${q.text}"/>
 						<ul>
-						<c:forEach items="${q.answers}" var="answ">
+						<c:forEach items="${q.answers}" var="answ" varStatus="ai">
 							<li>
-								<form:checkbox path="userAnswer" />
+								<form:checkbox path="questions[${qi.index}].answers[${ai.index}].userinput" value="true"/>
 								<c:out value="${answ.text}"/>
 							</li>
 						</c:forEach>

@@ -14,7 +14,7 @@
     	<property name="mappings">   
           <props>
 			<prop key="/welcome.htm">welcomeController</prop>
-			<prop key="/subjects.htm">welcomeController</prop>
+			<prop key="/subjects.htm">subjectController</prop>
 			<prop key="/test.htm">testController</prop>
 		 </props>       
        	</property> 
@@ -23,6 +23,10 @@
 	<!-- ************************************* Controllers ************************************ -->
 
 	<bean id="welcomeController" class="org.rup.game.controller.BaseController">
+		<constructor-arg ref="subjectDao"/>
+	</bean>
+
+	<bean id="subjectController" class="org.rup.game.controller.SubjectController">
 		<constructor-arg ref="subjectDao"/>
 	</bean>
 	
