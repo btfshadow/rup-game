@@ -22,9 +22,9 @@
 		<!--
 			OR mappings
 		-->
-		<mapping resource="org/rup/game/database/model/Subject.hbn.xml" />
 		<mapping resource="org/rup/game/database/model/Question.hbn.xml" />
-		<mapping resource="org/rup/game/database/model/Subject.hbn.xml" />
+		<mapping resource="org/rup/game/database/model/Subject.hbn.xml" /><!--
+		<mapping resource="org/rup/game/database/model/Answer.hbn.xml" />
 
-	</session-factory>
+	--></session-factory>
 </hibernate-configuration>
