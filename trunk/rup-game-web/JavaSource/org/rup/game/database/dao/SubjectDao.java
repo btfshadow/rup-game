@@ -1,6 +1,6 @@
 package org.rup.game.database.dao;
 
-import org.rup.game.database.model.BaseDomainObject;
+import org.rup.game.database.model.Subject;
 
 /**
  * 
@@ -15,6 +15,6 @@ public class SubjectDao extends AbstractDaoSupport {
 	 * @param persistedClass
 	 */
 	public SubjectDao() {
-		super(BaseDomainObject.class, ENTITY_NAME);
+		super(Subject.class, ENTITY_NAME);
 	}
 }
