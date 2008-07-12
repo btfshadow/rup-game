@@ -12,7 +12,9 @@
 				<label for="music">Music</label>
 				<input type="radio" name="music" value="Music">
 				<label for="sports">Sports</label>
-				<input type="radio" name="sports" value="Sports">
+				<a href="test.htm">
+					Sports
+				</a>
 				<input type="submit" value="Submit"> 
 			</fieldset>
 		</form>
