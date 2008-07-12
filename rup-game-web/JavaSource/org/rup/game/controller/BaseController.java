@@ -1,5 +1,7 @@
 package org.rup.game.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,11 +19,11 @@ import org.springframework.web.servlet.mvc.SimpleFormController;
 public class BaseController extends SimpleFormController {
 	private static final Logger LOG = Logger.getLogger(BaseController.class);
 	
-	private SubjectDao baseDao;
+	private SubjectDao subjectDao;
 	
 	public BaseController(SubjectDao baseDao) {
 		super();
-		this.baseDao = baseDao;
+		this.subjectDao = baseDao;
 		setFormView("welcome");
 		setCommandName("viewBean");
 		setSuccessView("chooseSubject");
@@ -37,9 +39,13 @@ public class BaseController extends SimpleFormController {
 
 	protected Object formBackingObject(HttpServletRequest arg0)
 			throws Exception {
-		LOG.info("Reading domain objects from database.");
+		LOG.info("Reading subjects from database.");
 		
-		final ViewBean bean = new ViewBean();		
+		List subjectList = subjectDao.list();
+		LOG.info("Loaded " + subjectList.size() + " subjects.");
+		
+		final ViewBean bean = new ViewBean();
+		bean.setSubject(subjectList);
 		return bean;
 	}
 }
