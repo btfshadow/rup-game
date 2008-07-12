@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import org.rup.game.controller.bean.TestBean;
 import org.rup.game.controller.bean.ViewBean;
-import org.rup.game.database.dao.TopicDao;
+import org.rup.game.database.dao.Subject;
 import org.springframework.validation.BindException;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
@@ -20,9 +20,9 @@ import org.springframework.web.servlet.view.RedirectView;
 public class TestController extends SimpleFormController {
 	private static final Logger LOG = Logger.getLogger(TestController.class);
 	
-	private TopicDao baseDao;
+	private Subject baseDao;
 	
-	public TestController(TopicDao baseDao) {
+	public TestController(Subject baseDao) {
 		super();
 		this.baseDao = baseDao;
 		setFormView("test");

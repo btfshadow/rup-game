@@ -12,7 +12,7 @@ public class TestResult extends BaseDomainObject {
 	
 	private Subject topic;
 	
-	private Skill skill;
+	private SkillLevel skill;
 	
 	/**
 	 * @return Returns the score.
@@ -31,14 +31,14 @@ public class TestResult extends BaseDomainObject {
 	/**
 	 * @return Returns the skill.
 	 */
-	public Skill getSkill() {
+	public SkillLevel getSkill() {
 		return skill;
 	}
 	
 	/**
 	 * @param skill The skill to set.
 	 */
-	public void setSkill(Skill skill) {
+	public void setSkill(SkillLevel skill) {
 		this.skill = skill;
 	}
 	/**
