@@ -10,7 +10,7 @@ public class Question  extends BaseDomainObject {
 
 	private String text;
 	
-	private Skill skill;
+	private SkillLevel skill;
 	
 	private List answers;
 	
@@ -45,14 +45,14 @@ public class Question  extends BaseDomainObject {
 	/**
 	 * @return Returns the skill.
 	 */
-	public Skill getSkill() {
+	public SkillLevel getSkill() {
 		return skill;
 	}
 	
 	/**
 	 * @param skill The skill to set.
 	 */
-	public void setSkill(Skill skill) {
+	public void setSkill(SkillLevel skill) {
 		this.skill = skill;
 	}
 }

@@ -4,7 +4,7 @@ package org.rup.game.database.model;
  * 
  * @author KLM63827
  */
-public class Skill extends BaseDomainObject {
+public class SkillLevel extends BaseDomainObject {
 	
 	private int level;
 
