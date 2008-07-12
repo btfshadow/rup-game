@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import org.rup.game.controller.bean.ViewBean;
 import org.rup.game.database.dao.SubjectDao;
-import org.rup.game.database.model.Subject;
 import org.rup.game.mock.utils.MockUtils;
 import org.springframework.validation.BindException;
 import org.springframework.web.servlet.ModelAndView;
@@ -46,11 +45,6 @@ public class BaseController extends SimpleFormController {
 		
 		List subjectList = subjectDao.list();
 		LOG.info("Loaded " + subjectList.size() + " subjects.");
-		
-		Subject subject = new Subject();
-		subject.setId(34);
-		subject.setName("Mock");
-		subjectList.add(subject);
 		
 		final ViewBean bean = new ViewBean();
 		bean.setSubjectList(subjectList);

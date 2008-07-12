@@ -90,7 +90,7 @@ public class TestController extends SimpleFormController {
 			}
 		}
 		
-		Question[] arrayOfQuestions = (Question[]) questions.toArray();
+		Question[] arrayOfQuestions = (Question[]) questions.toArray(new Question[questions.size()]);
 		Set randomQuestions = new HashSet();
 		Iterator it = listOfQuestions.iterator();
 		while (it.hasNext()) {
