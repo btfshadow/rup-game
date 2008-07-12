@@ -2,6 +2,10 @@ package org.rup.game.controller;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import org.rup.game.controller.bean.QuizBean;
 import org.rup.game.database.dao.SubjectDao;
+import org.rup.game.database.model.Question;
 import org.rup.game.database.model.Subject;
 import org.springframework.validation.BindException;
 import org.springframework.web.bind.ServletRequestUtils;
@@ -56,12 +61,43 @@ public class TestController extends SimpleFormController {
 		} else {
 			LOG.info("Loaded subject " + subject.getName() + "with " + subject.getQuestions().size()
 					+ " questions.");
-			// TODO: Pick random questions here
+
+
+			Set randomQuestions = getRandomQuestions(subject.getQuestions());
 			
 			final QuizBean bean = new QuizBean();
-			bean.setQuestions(subject.getQuestions());
+			bean.setQuestions(randomQuestions);
 			
 			return bean;
 		}
+	}
+
+	/**
+	 * @param questions
+	 * @return
+	 */
+	private Set getRandomQuestions(Set questions) {
+
+		Random randomGenerator = new Random();
+		    
+		List listOfQuestions = new ArrayList();
+		int numberQuestions = questions.size();
+		while(listOfQuestions.size() < 2)
+		{
+			Integer choice = new Integer(randomGenerator.nextInt(numberQuestions));
+			if(!listOfQuestions.contains(choice)) {
+				listOfQuestions.add(choice);
+			}
+		}
+		
+		Question[] arrayOfQuestions = (Question[]) questions.toArray();
+		Set randomQuestions = new HashSet();
+		Iterator it = listOfQuestions.iterator();
+		while (it.hasNext()) {
+			Integer i = (Integer)it.next();
+			randomQuestions.add(arrayOfQuestions[i.intValue()]);
+		}
+		
+		return randomQuestions;
 	}
 }
