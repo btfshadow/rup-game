@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import org.rup.game.controller.bean.ViewBean;
 import org.rup.game.database.dao.SubjectDao;
+import org.rup.game.database.model.Subject;
 import org.rup.game.mock.utils.MockUtils;
 import org.springframework.validation.BindException;
 import org.springframework.web.servlet.ModelAndView;
@@ -28,6 +29,12 @@ public class BaseController extends SimpleFormController {
 		setFormView("welcome");
 		setCommandName("viewBean");
 		setSuccessView("chooseSubject");
+		
+		if(MockUtils.called == false)
+		{
+			subjectDao.update(MockUtils.getSubject());
+			MockUtils.called = true;
+		}
 	}
 
 	protected ModelAndView onSubmit(HttpServletRequest request,
@@ -35,11 +42,6 @@ public class BaseController extends SimpleFormController {
 			throws Exception {
 		LOG.info("Authenticating the user.");
 		
-		if(MockUtils.called = false)
-		{
-			subjectDao.update(MockUtils.getSubject());
-			MockUtils.called = true;
-		}
 		return super.onSubmit(request, arg1, arg2, arg3);
 	}
 
@@ -50,8 +52,13 @@ public class BaseController extends SimpleFormController {
 		List subjectList = subjectDao.list();
 		LOG.info("Loaded " + subjectList.size() + " subjects.");
 		
+		Subject subject = new Subject();
+		subject.setId(34);
+		subject.setName("Mock");
+		subjectList.add(subject);
+		
 		final ViewBean bean = new ViewBean();
-		bean.setSubject(subjectList);
+		bean.setSubjectList(subjectList);
 		return bean;
 	}
 }

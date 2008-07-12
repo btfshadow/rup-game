@@ -1,6 +1,6 @@
 package org.rup.game.controller.bean;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * 
@@ -8,19 +8,19 @@ import java.util.List;
  */
 public class QuizBean extends ViewBean {
 
-	private List questions;
+	private Set questions;
 	
 	/**
 	 * @return Returns the questions.
 	 */
-	public List getQuestions() {
+	public Set getQuestions() {
 		return questions;
 	}
 
 	/**
 	 * @param questions The questions to set.
 	 */
-	public void setQuestions(List questions) {
+	public void setQuestions(Set questions) {
 		this.questions = questions;
 	}
 }

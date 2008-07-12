@@ -13,14 +13,14 @@ public class ViewBean {
 	/**
 	 * @return Returns the subject.
 	 */
-	public List getSubject() {
+	public List getSubjectList() {
 		return subjectList;
 	}
 	
 	/**
 	 * @param subject The subject to set.
 	 */
-	public void setSubject(List subject) {
+	public void setSubjectList(List subject) {
 		this.subjectList = subject;
 	}
 }
