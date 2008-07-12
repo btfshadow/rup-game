@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.rup.game.controller.bean.ViewBean;
-import org.rup.game.database.dao.Subject;
+import org.rup.game.database.dao.SubjectDao;
 import org.springframework.validation.BindException;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.SimpleFormController;
@@ -17,9 +17,9 @@ import org.springframework.web.servlet.mvc.SimpleFormController;
 public class BaseController extends SimpleFormController {
 	private static final Logger LOG = Logger.getLogger(BaseController.class);
 	
-	private Subject baseDao;
+	private SubjectDao baseDao;
 	
-	public BaseController(Subject baseDao) {
+	public BaseController(SubjectDao baseDao) {
 		super();
 		this.baseDao = baseDao;
 		setFormView("welcome");
