@@ -6,7 +6,7 @@ import java.util.List;
  * 
  * @author KLM63827
  */
-public class Topic extends BaseDomainObject {
+public class Subject extends BaseDomainObject {
 
 	private List questions;
 	

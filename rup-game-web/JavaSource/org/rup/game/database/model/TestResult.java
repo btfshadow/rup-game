@@ -10,7 +10,7 @@ public class TestResult extends BaseDomainObject {
 	
 	private int score;
 	
-	private Topic topic;
+	private Subject topic;
 	
 	private Skill skill;
 	
@@ -44,13 +44,13 @@ public class TestResult extends BaseDomainObject {
 	/**
 	 * @return Returns the topic.
 	 */
-	public Topic getTopic() {
+	public Subject getTopic() {
 		return topic;
 	}
 	/**
 	 * @param topic The topic to set.
 	 */
-	public void setTopic(Topic topic) {
+	public void setTopic(Subject topic) {
 		this.topic = topic;
 	}
 	/**
