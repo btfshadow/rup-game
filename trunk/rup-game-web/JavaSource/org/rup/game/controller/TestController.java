@@ -4,9 +4,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
-import org.rup.game.controller.bean.TestBean;
+import org.rup.game.controller.bean.QuizBean;
 import org.rup.game.database.dao.SubjectDao;
+import org.rup.game.database.model.Subject;
 import org.springframework.validation.BindException;
+import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.SimpleFormController;
 
@@ -17,11 +19,11 @@ import org.springframework.web.servlet.mvc.SimpleFormController;
 public class TestController extends SimpleFormController {
 	private static final Logger LOG = Logger.getLogger(TestController.class);
 	
-	private SubjectDao baseDao;
+	private SubjectDao subjectDao;
 	
 	public TestController(SubjectDao baseDao) {
 		super();
-		this.baseDao = baseDao;
+		this.subjectDao = baseDao;
 		setFormView("test");
 		setCommandName("testBean");
 	}
@@ -36,12 +38,16 @@ public class TestController extends SimpleFormController {
 		return mav;
 	}
 
-	protected Object formBackingObject(HttpServletRequest request)
-			throws Exception {
+	protected Object formBackingObject(HttpServletRequest request) throws Exception {
 		LOG.info("Creating a test.");
+		long subjectId = ServletRequestUtils.getRequiredLongParameter(request, "subjectId");
 		
-		final TestBean bean = new TestBean();
-		bean.setObjectsCount(baseDao.list().size());
+		Subject subject = (Subject) subjectDao.get(new Long(subjectId));
+		
+		// TODO: Pick random questions here
+		
+		final QuizBean bean = new QuizBean();
+		bean.setQuestions(subject.getQuestions());
 		
 		return bean;
 	}
