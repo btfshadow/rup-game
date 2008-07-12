@@ -10,8 +10,6 @@
 			<generator class="increment"/>
 		</id>
 		
-		<property name="name" column="NAME" lazy="false"/>
-
 		<!--
 
 		<set name="configurations" cascade="all,delete-orphan" lazy="false">

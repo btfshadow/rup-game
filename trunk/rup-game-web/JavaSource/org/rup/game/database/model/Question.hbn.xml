@@ -10,9 +10,11 @@
 			<generator class="increment"/>
 		</id>
 		
-		<property name="description" column="description" lazy="false"/>
+		<property name="description" column="description" lazy="true"/>
+		
+		<many-to-one name="skillLevel" column="skillLevelId" not-null="true"/>
 
-		<set name="answers" cascade="all,delete-orphan" lazy="false">
+		<set name="answers" cascade="all,delete-orphan" lazy="true">
 			<key column="QUESTION_ID"/>
 			<one-to-many class="org.rup.game.database.model.Answer"/>
 		</set> 
