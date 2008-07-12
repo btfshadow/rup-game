@@ -4,18 +4,18 @@
    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-	<class name="org.rup.game.database.model.Subject" table="SUBJECT">
+	<class name="org.rup.game.database.model.Question" table="QUESTION">
 
 		<id name="id" column="ID">
 			<generator class="increment"/>
 		</id>
 		
-		<property name="name" column="NAME" lazy="false"/>
+		<property name="description" column="description" lazy="false"/>
 
-		<set name="questions" cascade="all,delete-orphan" lazy="false">
-			<key column="SUBJECT_ID"/>
-			<one-to-many class="org.rup.game.database.model.Question"/>
+		<set name="answers" cascade="all,delete-orphan" lazy="false">
+			<key column="QUESTION_ID"/>
+			<one-to-many class="org.rup.game.database.model.Answer"/>
 		</set> 
-
+		
 	</class>
 </hibernate-mapping>
