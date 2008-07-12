@@ -13,7 +13,7 @@ public class QuizBean extends ViewBean {
 	/**
 	 * @return Returns the questions.
 	 */
-	List getQuestions() {
+	public List getQuestions() {
 		return questions;
 	}
 
