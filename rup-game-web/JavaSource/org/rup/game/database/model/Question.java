@@ -12,6 +12,8 @@ public class Question  extends BaseDomainObject {
 	
 	private List answers;
 	
+	private SkillLevel skillLevel;
+	
 	/**
 	 * @return Returns the answers.
 	 */
@@ -40,4 +42,16 @@ public class Question  extends BaseDomainObject {
 		this.description = text;
 	}
 	
+	/**
+	 * @return Returns the skillLevel.
+	 */
+	public SkillLevel getSkillLevel() {
+		return skillLevel;
+	}
+	/**
+	 * @param skillLevel The skillLevel to set.
+	 */
+	public void setSkillLevel(SkillLevel skillLevel) {
+		this.skillLevel = skillLevel;
+	}
 }

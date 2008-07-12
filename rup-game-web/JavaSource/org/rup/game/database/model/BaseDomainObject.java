@@ -7,7 +7,6 @@ package org.rup.game.database.model;
 public class BaseDomainObject {
 
 	private long id;
-	private String name;
 	
 	/**
 	 * @return Returns the id.
@@ -21,16 +20,5 @@ public class BaseDomainObject {
 	public void setId(long id) {
 		this.id = id;
 	}
-	/**
-	 * @return Returns the name.
-	 */
-	public String getName() {
-		return name;
-	}
-	/**
-	 * @param name The name to set.
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
+	
 }
