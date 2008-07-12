@@ -1,20 +1,20 @@
 package org.rup.game.database.dao;
 
-import org.rup.game.database.model.BaseDomainObject;
+import org.rup.game.database.model.TestResult;
 
 /**
  * 
  *
  * @author klm63827
  */
-public class ResultDao extends AbstractDaoSupport {
+public class TestResultDao extends AbstractDaoSupport {
 	
 	private static String ENTITY_NAME = "Result";
 	
 	/**
 	 * @param persistedClass
 	 */
-	public ResultDao() {
-		super(BaseDomainObject.class, ENTITY_NAME);
+	public TestResultDao() {
+		super(TestResult.class, ENTITY_NAME);
 	}
 }

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import org.rup.game.controller.bean.ViewBean;
 import org.rup.game.database.dao.SubjectDao;
+import org.rup.game.mock.utils.MockUtils;
 import org.springframework.validation.BindException;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.SimpleFormController;
@@ -34,6 +35,11 @@ public class BaseController extends SimpleFormController {
 			throws Exception {
 		LOG.info("Authenticating the user.");
 		
+		if(MockUtils.called = false)
+		{
+			subjectDao.update(MockUtils.getSubject());
+			MockUtils.called = true;
+		}
 		return super.onSubmit(request, arg1, arg2, arg3);
 	}
 

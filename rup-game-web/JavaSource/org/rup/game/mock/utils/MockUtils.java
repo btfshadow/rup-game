@@ -17,7 +17,8 @@ import org.rup.game.database.model.Subject;
  */
 public class MockUtils {
 
-	public List getSubject()
+	public static boolean called = false;
+	public static List getSubject()
 	{
 		List subjects = new ArrayList();
 		Subject subjectOne = new Subject();
@@ -30,7 +31,7 @@ public class MockUtils {
 	/**
 	 * @return
 	 */
-	private List getQuestions() {
+	private static List getQuestions() {
 		List questions = new ArrayList();
 		Question q = new Question();
 		q.setDescription("Who is best footballer in thw world?");
@@ -42,7 +43,7 @@ public class MockUtils {
 	/**
 	 * @return
 	 */
-	private List getAnswers() {
+	private static List getAnswers() {
 		List answers = new ArrayList();
 		Answer answer = new Answer();
 		answer.setCorrect(true);
