@@ -1,9 +1,4 @@
 <%@include file="_head.jspf"%>
-<%
-	final java.util.List subjectList = (java.util.List) request.getAttribute("subjectList");
-	//final String user = (String)session.getAttribute("user");
-	System.out.println(subjectList);
-%>
 <body>
 
 	<h2>Available subjects</h2>
@@ -13,15 +8,18 @@
 			<fieldset>
 				<legend>Choose a subject</legend>
 				<ul>
-				<% for (int i = 0; i < subjectList.size(); i++) {
-					final Subject subject = (Subject) subjectList.get(i);
-				%>
-					<li>
-						<a href="test.htm?subjectId=<%=subject.getId()%>">
-							<%=subject.getName()%>
-						</a>
-					</li>
-				<% } %>
+					<c:forEach items="${subjectList}" var="subject">
+						<li>
+							<span class="subject">
+								<c:out value="${subject.name}"/>
+							</span>
+							<c:forEach items="${skillList}" var="skill">
+								[<a href="test.htm?subjectId=<c:out value='${subject.id}'/>&skillId=<c:out value='${skill.level}'/>">
+									<c:out value="${skill.name}"/>
+								</a>]
+							</c:forEach>
+						</li>
+					</c:forEach>
 				</ul>
 				<hr/>
 			</fieldset>

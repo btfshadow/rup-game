@@ -13,7 +13,8 @@
     <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">  
     	<property name="mappings">   
           <props>
-			<prop key="/welcome.htm">welcomeController</prop>
+			<prop key="/certificate.htm">certificateController</prop>
+			<prop key="/entry.htm">entryController</prop>
 			<prop key="/subjects.htm">subjectController</prop>
 			<prop key="/test.htm">testController</prop>
 		 </props>       
@@ -22,8 +23,11 @@
 
 	<!-- ************************************* Controllers ************************************ -->
 
-	<bean id="welcomeController" class="org.rup.game.controller.BaseController">
+	<bean id="entryController" class="org.rup.game.controller.EntryController">
 		<constructor-arg ref="subjectDao"/>
+		<property name="commandName" value="userBean"/>
+		<property name="commandClass" value="org.rup.game.controller.bean.UserBean"/>
+		<property name="successView" value="chooseSubject"/>
 	</bean>
 
 	<bean id="subjectController" class="org.rup.game.controller.SubjectController">
@@ -32,7 +36,14 @@
 	
 	<bean id="testController" class="org.rup.game.controller.TestController">
 		<constructor-arg ref="subjectDao"/>
+		<property name="commandName" value="testBean"/>
+		<property name="commandClass" value="org.rup.game.controller.bean.QuizBean"/>
+		<property name="sessionForm" value="true"/>
+		<property name="successView" value="testResult"/>
+		<property name="testSize" value="8"/>
 	</bean>
+
+	<bean id="certificateController"  class="org.rup.game.controller.CertificateController"/>
 
 	<!-- ************************************* View resolvers ********************************* -->
 
@@ -41,4 +52,13 @@
 		<property name="suffix" value=".jsp"/>
 	</bean>
 
+	<!-- ************************************* Exception ********************************* -->
+	<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="exceptionMappings">
+			<map>
+				<entry key="org.rup.game.controller.SessionExpiredException" value="sessionExpired"/>
+			</map>
+		</property>
+	</bean>
+	
 </beans>

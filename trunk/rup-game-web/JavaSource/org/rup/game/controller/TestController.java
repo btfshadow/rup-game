@@ -1,7 +1,7 @@
 package org.rup.game.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -16,14 +16,15 @@ import org.rup.game.controller.bean.AnswerBean;
 import org.rup.game.controller.bean.QuestionBean;
 import org.rup.game.controller.bean.QuizBean;
 import org.rup.game.controller.bean.ResultBean;
+import org.rup.game.controller.bean.UserBean;
 import org.rup.game.database.dao.SubjectDao;
-import org.rup.game.database.model.Answer;
 import org.rup.game.database.model.Question;
 import org.rup.game.database.model.Subject;
 import org.springframework.validation.BindException;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.SimpleFormController;
+import org.springframework.web.servlet.view.RedirectView;
 
 /**
  * 
@@ -34,136 +35,162 @@ public class TestController extends SimpleFormController {
 	
 	private SubjectDao subjectDao;
 	
+	private int testSize = 5;
+	
 	public TestController(SubjectDao baseDao) {
 		super();
 		this.subjectDao = baseDao;
-		setFormView("test");
-		setCommandName("testBean");
 	}
-
-	protected ModelAndView onSubmit(HttpServletRequest arg0,
-			HttpServletResponse arg1, Object arg2, BindException arg3)
-			throws Exception {
-		LOG.info("Evaluating the test.");
-		
-		final QuizBean result = (QuizBean) arg2;
-		
-		ResultBean resultBean = calculateResult(result); 
-		final HashMap model = new HashMap();
-		model.put("resultBean", resultBean);
-		setSuccessView("testResult");
-		ModelAndView mav = new ModelAndView("testResult", model);
-		return mav;
-	}
-
-	/**
-	 * @param result
-	 * @return
-	 */
-	private ResultBean calculateResult(QuizBean result) {
-		
-		int score = 0;
-		ResultBean resultBean = new ResultBean();
-		Iterator it = result.getQuestions().iterator();
-		while (it.hasNext()) {
-			QuestionBean question = (QuestionBean)it.next();
-			System.out.println("Question: " +  question.getText());
-			Iterator iteratorAnswers = question.getAnswers().iterator();
-			while (iteratorAnswers.hasNext()) {
-				AnswerBean answer = (AnswerBean)iteratorAnswers.next();
-				System.out.println("  " + answer.getText() + ": " + answer.getUserinput());
-				if("true".equals(answer.getUserinput()) && answer.isCorrect())
-				{
-					score++;
-					break;					
-				}
-			}
-		}
-		resultBean.setResult(score/2);
-		return resultBean;
-	}
-
+	
 	protected Object formBackingObject(HttpServletRequest request) throws Exception {
-		LOG.info("Creating a test.");
-		long subjectId = ServletRequestUtils.getRequiredLongParameter(request, "subjectId");
+		LOG.info("Creating a test for user " + EntryController.getUserFromSession(request));
 		
-		Subject subject = (Subject) subjectDao.get(new Long(subjectId));
+		long subjectId = ServletRequestUtils.getRequiredLongParameter(request, "subjectId");
+		long skillId = ServletRequestUtils.getRequiredLongParameter(request, "skillId");
+		final Subject subject = (Subject) subjectDao.get(new Long(subjectId));
+		
 		if (subject == null) {
-			LOG.error("Could not find subject with id=" + subjectId);
+			LOG.error("Could not find a subject with id=" + subjectId);
 			
 			QuizBean quizBean = new QuizBean();
 			quizBean.setQuestions(new ArrayList());
 			return quizBean;
 			
 		} else {
-			LOG.info("Loaded subject " + subject.getName() + "with " + subject.getQuestions().size()
-					+ " questions.");
+			LOG.info("Loaded subject " + subject.getName()
+					+ "with " + subject.getQuestions().size() + " questions.");
 
-			Set randomQuestions = getRandomQuestions(subject.getQuestions());
+			// Pick a random set of questions to ask.
 			
-			List listOfRandomQuestions = new ArrayList();
-			Iterator itRandom = randomQuestions.iterator();
-			while(itRandom.hasNext()) {
-				Question q = (Question)itRandom.next();
-				QuestionBean newQuestion = new QuestionBean();
-				newQuestion.setText(q.getDescription());
-				List listAnswers = getAnswers(q.getAnswers());
-				newQuestion.setAnswers(listAnswers);
-				listOfRandomQuestions.add(newQuestion);
+			final Set randomQuestions = getRandomQuestions(subject.getQuestions());
+			
+			// Transform the set of selected questions
+			// into ordered list to be displayed on the screen.
+			
+			final List listOfRandomQuestions = new ArrayList();
+			for (Iterator iter = randomQuestions.iterator(); iter.hasNext(); ) {
+				Question q = (Question) iter.next();
+				listOfRandomQuestions.add(new QuestionBean(q));
 			}
 			
 			final QuizBean bean = new QuizBean();
 			bean.setQuestions(listOfRandomQuestions);
 			
+			// Mark timestamp of the start of the test
+			// TODO: Load skill from database instead of using hardcoded values
+			EntryController.getUserFromSession(request).startQuiz(
+					new Date().getTime(), subject.getName(), (skillId == 1) ? "Beginner" : "Advanced");
 			return bean;
 		}
 	}
 
+	protected ModelAndView onSubmit(HttpServletRequest request,
+			HttpServletResponse response, Object command, BindException e)
+			throws Exception {
+		
+		final QuizBean filledQuiz = (QuizBean) command;
+		final UserBean userBean = EntryController.getUserFromSession(request);
+		final ResultBean result = new ResultBean();
+		final long elapsedMilis = new Date().getTime() - userBean.getCurrentQuiz().getTsStarted();
+		
+		java.util.Calendar c = java.util.Calendar.getInstance();
+		c.setTimeInMillis(userBean.getCurrentQuiz().getTsStarted());
+		LOG.debug("Test start time: " + c.getTime());
+		LOG.debug("Current time:" + new java.util.Date());
+		LOG.debug("Elapsed milis: " + elapsedMilis);
+		
+		result.setDurationTime(elapsedMilis);
+		result.setSubjectName(userBean.getCurrentQuiz().getSubjectName());
+		result.setSkillLevelName(userBean.getCurrentQuiz().getSkillLevelName());
+		
+		userBean.closeCurrentQuiz();
+		
+		LOG.debug("Assesing quiz for user " + userBean);
+		calculateScore(result, filledQuiz);
+		
+		request.getSession().setAttribute("result", result);
+		return new ModelAndView(new RedirectView("certificate.htm"));
+	}
+
 	/**
-	 * @param set
+	 * @param filledQuiz
 	 * @return
 	 */
-	private List getAnswers(Set answers) {
+	private void  calculateScore(final ResultBean resultBean, final QuizBean filledQuiz) {
 		
-		List newAnswers = new ArrayList();
-		Iterator itAnswers = answers.iterator();
-		while(itAnswers.hasNext()) {
-			AnswerBean newAnswer = new AnswerBean();
-			Answer answer = (Answer)itAnswers.next();
-			newAnswer.setCorrect(answer.isCorrect());
-			newAnswer.setText(answer.getText());
-			newAnswers.add(newAnswer);
+		int totalScore = 0;
+		final int questionNumber = filledQuiz.getQuestions().size();
+		
+		for (int i = 0; i < filledQuiz.getQuestions().size(); i++) {
+			final QuestionBean question = (QuestionBean) filledQuiz.getQuestions().get(i);
+			LOG.debug("  " + (i + 1) +  ". " +  question.getText());
+			
+			boolean questionCorrect = true;
+
+			for (int ia = 0; ia < question.getAnswers().size(); ia++) {
+				final AnswerBean answer = (AnswerBean) question.getAnswers().get(ia);
+				LOG.debug("    Answer: " + answer);
+				LOG.debug("      User: " + answer.getUserinput());
+
+				final boolean answerCorrect = "true".equals(answer.getUserinput()) == answer.isCorrect();
+				LOG.debug("      Mark: " + (answerCorrect ? "correct" : "INCORRECT"));
+				if (!answerCorrect) {
+					questionCorrect = false;
+				}
+			}
+			
+			final int questionScore = (questionCorrect) ? 1 : 0;
+			LOG.debug("  Question score: " + questionScore);
+			totalScore += questionScore;
 		}
 		
-		return newAnswers;
+		LOG.debug("Total score: " + totalScore);
+		LOG.debug("Nr of questions: " + questionNumber);
+		int result = 0;
+		
+		if (totalScore == questionNumber) {
+			result = 5;
+		} else {
+			result = (int) Math.round((((double)totalScore) / ((double)questionNumber)) * 5);
+			if (result < 1)
+				result = 1;
+			if (result > 4)
+				result = 4;
+		}
+		
+		LOG.debug("Result: " + result);
+		resultBean.setResult(result);
 	}
 
 	/**
 	 * @param questions
 	 * @return
 	 */
-	private Set getRandomQuestions(Set questions) {
+	private Set getRandomQuestions(final Set questions) {
 
 		Random randomGenerator = new Random();
 		    
-		List listOfQuestions = new ArrayList();
-		int numberQuestions = questions.size();
-		while(listOfQuestions.size() < 2)
-		{
-			Integer choice = new Integer(randomGenerator.nextInt(numberQuestions));
+		final List listOfQuestions = new ArrayList();
+		final int numberOfQuestions = questions.size();
+
+		while(listOfQuestions.size() < testSize) {
+			Integer choice = new Integer(randomGenerator.nextInt(numberOfQuestions));
 			if(!listOfQuestions.contains(choice)) {
 				listOfQuestions.add(choice);
 			}
 		}
 		
-		Question[] arrayOfQuestions = (Question[]) questions.toArray(new Question[questions.size()]);
-		Set randomQuestions = new HashSet();
-		Iterator it = listOfQuestions.iterator();
-		while (it.hasNext()) {
-			Integer i = (Integer)it.next();
-			randomQuestions.add(arrayOfQuestions[i.intValue()]);
+		final Question[] allQuestions = (Question[]) questions.toArray(new Question[questions.size()]);
+		final Set randomQuestions = new HashSet();
+		for (Iterator iter = listOfQuestions.iterator(); iter.hasNext();) {
+			final Integer i = (Integer) iter.next();
+			randomQuestions.add(allQuestions[i.intValue()]);
 		}
 		
 		return randomQuestions;
+	}
+	
+	public void setTestSize(int testSize) {
+		this.testSize = testSize;
 	}
 }

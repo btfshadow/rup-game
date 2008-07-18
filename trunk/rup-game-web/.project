@@ -3,6 +3,7 @@
 	<name>rup-game-web</name>
 	<comment></comment>
 	<projects>
+		<project>rup-game</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

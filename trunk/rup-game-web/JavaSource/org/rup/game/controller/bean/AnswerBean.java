@@ -6,6 +6,8 @@
  */
 package org.rup.game.controller.bean;
 
+import org.rup.game.database.model.Answer;
+
 /**
  * @author KLM63827
  *
@@ -19,6 +21,16 @@ public class AnswerBean {
 	private boolean correct;
 	
 	private String userinput;
+	
+	public AnswerBean() {
+		super();
+	}
+	
+	public AnswerBean(final Answer answer) {
+		setText(answer.getText());
+		setCorrect(answer.isCorrect());
+	}
+	
 	/**
 	 * @return Returns the correct.
 	 */
@@ -54,5 +66,9 @@ public class AnswerBean {
 	 */
 	public void setUserinput(String userinput) {
 		this.userinput = userinput;
+	}
+	
+	public String toString() {
+		return getText() + " [" + isCorrect() + "]";
 	}
 }

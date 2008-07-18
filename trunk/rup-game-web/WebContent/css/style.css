@@ -1,7 +1,11 @@
 body * {
-	color: blue;
+	color: rgb(59,89,152);
 	font-family: tahoma, arial, helvetica;
 	font-size: 10pt;
+}
+
+h2 {
+	font-size: 1.1em;
 }
 
 code {
@@ -10,9 +14,43 @@ code {
 	font-weight: bold;
 }
 
-.strong {
-	font-size: 48pt;
+.form_row {
+	padding: 3px;
+}
+
+.form_row label {
+	float: left;
+	width: 10em;
+}
+
+.subject {
 	font-weight: bold;
+}
+
+.question {
+	font-weight: bold;
+	padding: 12px 2px 4px 2px;
+}
+
+#certificate_container {
+	width: 1000px;
+	margin: auto;
+}
+
+#certificate {
+
+}
+
+#certificate h1 {
+	font-size: 3em;
+}
+
+#certificate table td.label {
+	width: 8em;
+}
+
+#certificate table strong {
+	font-size: 1.5em;
 }
 
 .box {
@@ -27,4 +65,9 @@ code {
 
 .box * {
 	font-size: 9pt;
+}
+
+hr {
+	color: silver;
+	border-color: silver;
 }

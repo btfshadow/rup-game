@@ -8,6 +8,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<link rel="stylesheet" media="screen" type="text/css" href="css/style.css" />
+	<link rel="stylesheet" media="print" type="text/css" href="css/print.css" />
 
-	<title>RUP Game</title>
+	<title>Manage My Skills</title>
 </head>
