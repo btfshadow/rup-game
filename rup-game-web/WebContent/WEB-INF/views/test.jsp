@@ -19,7 +19,9 @@
 			<ol>
 				<c:forEach items="${testBean.questions}" var="q" varStatus="qi">
 					<li>
-						<c:out value="${q.text}"/>
+						<div class="question">
+							<c:out value="${q.text}"/>
+						</div>
 						<ul>
 						<c:forEach items="${q.answers}" var="answ" varStatus="ai">
 							<li>

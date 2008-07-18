@@ -11,8 +11,9 @@ package org.rup.game.controller.bean;
 public class ResultBean extends ViewBean {
 
 	private int result;
-	private String Subject;
-	private String skillLevel;
+	private String subjectName;
+	private String skillLevelName;
+	private String durationTime;
 	
 	/**
 	 * @return Returns the result.
@@ -29,26 +30,55 @@ public class ResultBean extends ViewBean {
 	/**
 	 * @return Returns the skillLevel.
 	 */
-	public String getSkillLevel() {
-		return skillLevel;
+	public String getSkillLevelName() {
+		return skillLevelName;
 	}
 	/**
 	 * @param skillLevel The skillLevel to set.
 	 */
-	public void setSkillLevel(String skillLevel) {
-		this.skillLevel = skillLevel;
+	public void setSkillLevelName(String skillLevel) {
+		this.skillLevelName = skillLevel;
 	}
 	
 	/**
 	 * @return Returns the subject.
 	 */
-	public String getSubject() {
-		return Subject;
+	public String getSubjectName() {
+		return subjectName;
 	}
 	/**
 	 * @param subject The subject to set.
 	 */
-	public void setSubject(String subject) {
-		Subject = subject;
+	public void setSubjectName(String subject) {
+		subjectName = subject;
+	}
+	/**
+	 * @return Returns the durationTime.
+	 */
+	public String getDurationTime() {
+		return durationTime;
+	}
+	/**
+	 * @param durationTime The durationTime to set.
+	 */
+	public void setDurationTime(String durationTime) {
+		this.durationTime = durationTime;
+	}
+	/**
+	 * 
+	 * @param totalMiliseconds
+	 */
+	public void setDurationTime(long totalMiliseconds) {
+		
+		final int hours = (int) Math.floor(totalMiliseconds / (60 * 60 * 1000));
+		final int afterHours = (int) (totalMiliseconds - 60 * 60 * 1000 * hours);
+		
+		final int minutes = (int) Math.floor(afterHours / (60 * 1000));
+		final int afterMinutes = afterHours - 60 * 100 * minutes;
+		
+		final int seconds = (int) Math.floor(afterMinutes / 1000);
+		final int miliseconds = (int) (totalMiliseconds % 1000);
+		
+		setDurationTime(hours + ":" + minutes + ":" + seconds + "." + miliseconds);
 	}
 }

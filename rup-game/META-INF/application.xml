@@ -2,7 +2,7 @@
 <!DOCTYPE application PUBLIC "-//Sun Microsystems, Inc.//DTD J2EE Application 1.3//EN" "http://java.sun.com/dtd/application_1_3.dtd">
 <application id="Application_ID">
 	<display-name>rup-game</display-name>
-	<module id="WebModule_1215527486991">
+	<module id="WebModule_1216363208187">
 		<web>
 			<web-uri>rup-game-web.war</web-uri>
 			<context-root>rup-game-web</context-root>
